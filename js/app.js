@@ -12,8 +12,15 @@ function renderBooks(){
         const spanAuthor = document.createElement('span');
         spanAuthor.textContent = book.author;
 
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'btn';
+        removeBtn.textContent = 'Remove';
+        removeBtn.addEventListener('click', () => removeBook(index));
+
         bookDiv.appendChild(spanTitle);
         bookDiv.appendChild(spanAuthor);
+        bookDiv.appendChild(removeBtn);
+
         listDisplay.appendChild(bookDiv);
         
     }); 
@@ -36,6 +43,12 @@ function addBook(){
         authorInput.value = ''; 
         renderBooks();
     }
+}
+
+function removeBook(index) {
+    books.splice(index, 1);
+    localStorage.setItem('books', JSON.stringify(books));
+    renderBooks();
 }
 
 const addButton = document.getElementById('add');
